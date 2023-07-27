@@ -1,0 +1,24 @@
+﻿@using Common.Responses;
+<MudGrid>
+    <MudItem xs="12">
+        
+    </MudItem>
+    <MudItem xs="12" sm="3">
+        <MudTextField @bind-Value="Account.AccountHolder" ReadOnly Label="Account Holder" Variant="Variant.Filled" Margin="Margin.Dense"></MudTextField>
+    </MudItem>
+    <MudItem xs="12" sm="3">
+        <MudTextField @bind-Value="Account.AccountNumber" ReadOnly Label="Account Number" Variant="Variant.Filled" Margin="Margin.Dense"></MudTextField>
+    </MudItem>
+    <MudItem xs="12" sm="3">
+        <MudTextField @bind-Value="Account.BranchCode" ReadOnly Label="Branch Code" Variant="Variant.Filled" Margin="Margin.Dense"></MudTextField>
+    </MudItem>
+    <MudItem xs="12" sm="3">
+        <MudTextField @bind-Value="Account.AccountType" ReadOnly Label="Account Type" Variant="Variant.Filled" Margin="Margin.Dense"></MudTextField>
+    </MudItem>
+</MudGrid>
+
+@code
+{
+    [Parameter]
+    public AccountResponse Account { get; set; } = new();
+}

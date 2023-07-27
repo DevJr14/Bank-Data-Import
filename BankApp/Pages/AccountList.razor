@@ -1,0 +1,40 @@
+﻿@page "/accounts"
+
+@using Common.Responses;
+
+@if (_isLoading)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Items="@Accounts" Elevation="25" Dense="@true" Hover="@true" Filter="new Func<AccountResponse,bool>(SearchFunc)" @bind-SelectedItem="_selectedAccount">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Accounts</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchText" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Account Holder</MudTh>
+            <MudTh>Branch Code</MudTh>
+            <MudTh>Account Number</MudTh>
+            <MudTh>Account Type</MudTh>
+            <MudTh Style="text-align:right">Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Account Holder">@context.AccountHolder</MudTd>
+            <MudTd DataLabel="Branch Code">@context.BranchCode</MudTd>
+            <MudTd DataLabel="Account Number">@context.AccountNumber</MudTd>
+            <MudTd DataLabel="Account Type">@context.AccountType</MudTd>
+            <MudTd DataLabel="Actions" Style="text-align:right">
+                <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Size="Size.Small">
+                    <MudMenuItem OnClick="() => ViewTransactions(context.AccountNumber)" >View Transactions</MudMenuItem>
+                    <MudMenuItem OnClick="() => InvokeUpdateAccountDialog(context)" >Update Account Type</MudMenuItem>
+                </MudMenu>
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[]{15, 25, 50, 75, 100 }" />
+        </PagerContent>
+    </MudTable>    
+}

@@ -1,0 +1,11 @@
+﻿@page "/import-file"
+
+<MudCard Elevation="25">
+    <MudCardContent>
+        <MudText>Import</MudText>
+        <MudText Typo="Typo.body2">Import Csv files by clicking the button below.</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.ImportExport" OnClick="() => InvokeCsvUploaderDialog()" Color="Color.Primary">Import</MudButton>
+    </MudCardActions>
+</MudCard>

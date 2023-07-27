@@ -1,0 +1,33 @@
+﻿@using Common;
+<MudForm @ref="@form" Model="Account">
+    <MudDialog>
+        <TitleContent>
+            @{
+                <MudText Typo="Typo.h6">
+                    <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
+                    Update Account Status
+                </MudText>
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" md="12">
+                    <MudSelect @bind-Value="Account.AccountType" Label="Select Account Type" HelperText="Account Type" >
+                        @foreach (AccountType type in Enum.GetValues(typeof(AccountType)))
+                        {
+                            <MudSelectItem Value="@type">@type</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" Class="ms-4" OnClick="Cancel">Cancel</MudButton>
+            <MudSpacer />
+            <MudButton DisableElevation Variant="Variant.Filled" StartIcon="@Icons.Material.Outlined.Update" OnClick="@(async () => await UpdateAccountAsync())" Class="me-4" Color="Color.Success">
+                Save
+            </MudButton>
+        </DialogActions>
+    </MudDialog>
+</MudForm>
+

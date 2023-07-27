@@ -1,0 +1,41 @@
+﻿@page "/transactions/{AccountNumber}"
+
+@using Common.Responses;
+
+@if (_isLoading)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudExpansionPanels Elevation="25" MultiExpansion="true" >
+        <MudExpansionPanel Text="Account Details" IsInitiallyExpanded>
+            <AccountDetails Account="@Account"/>
+        </MudExpansionPanel>
+        <MudExpansionPanel Text="Transactions" Disabled="false" IsInitiallyExpanded>
+            <MudTable Items="@Transactions" Elevation="25" Dense="@true" Hover="@true">
+                <HeaderContent>
+                    <MudTh>Transaction Date</MudTh>
+                    <MudTh>Amount</MudTh>
+                    <MudTh>Status</MudTh>
+                    <MudTh>EffectiveStatus Date</MudTh>
+                    <MudTh Style="text-align: right">Time Breached</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                <MudTd DataLabel="Transaction Date">@context.TransactionDate.ToString("dd/MM/yyyy")</MudTd>
+                    <MudTd DataLabel="Amount">@context.Amount</MudTd>
+                    <MudTd DataLabel="Status">@context.Status</MudTd>
+                    <MudTd DataLabel="EffectiveStatus Date">@context.EffectiveStatusDate.ToString("dd/MM/yyyy")</MudTd>
+                <MudTd DataLabel="Time Breached" Style="text-align: right">
+                    <MudChip Color=@(SetColor(context.TimeBreached)) Variant="Variant.Filled" Size="Size.Small">
+                        <MudHighlighter Text="@context.TimeBreached"/>
+                    </MudChip>
+                </MudTd>
+                </RowTemplate>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new int[]{15, 25, 50, 75, 100 }" />
+            </PagerContent>
+            </MudTable>
+        </MudExpansionPanel>
+    </MudExpansionPanels>    
+}

@@ -1,0 +1,33 @@
+﻿@page "/report"
+
+@using Common.Responses;
+
+@if (_isLoading)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Items="@Summaries" Elevation="25" Dense="@true" Hover="@true">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Summaries</MudText>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Branch Code</MudTh>
+            <MudTh>Account Type</MudTh>
+            <MudTh>Status</MudTh>
+            <MudTh>Total Count</MudTh>
+            <MudTh Style="text-align:right">Total Amount</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Branch Code">@context.BranchCode</MudTd>
+            <MudTd DataLabel="Account Type">@context.AccountType</MudTd>
+            <MudTd DataLabel="Status">@context.Status</MudTd>
+            <MudTd DataLabel="Total Count">@context.TransactionsCount</MudTd>
+            <MudTd DataLabel="Total Amount" Style="text-align:right">@context.TotalAmount</MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[]{15, 25, 50, 75, 100 }" />
+        </PagerContent>
+    </MudTable>
+}

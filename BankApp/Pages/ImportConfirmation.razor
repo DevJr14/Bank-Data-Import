@@ -1,0 +1,28 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.ImportExport" Class="mr-3 mb-n1" />
+            Import Confirmation
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText>@ContentText</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton DisableElevation OnClick="Cancel" Variant="Variant.Filled" Class="ms-4">Cancel</MudButton>
+        <MudSpacer />
+        <MudButton DisableElevation Color="Color.Error" Variant="Variant.Filled" OnClick="Submit" Class="me-4">Confirm</MudButton>
+    </DialogActions>
+</MudDialog>
+@code 
+{
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public string ContentText { get; set; }
+
+    void Submit()
+    {
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+    void Cancel() => MudDialog.Cancel();
+}
